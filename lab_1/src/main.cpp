@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <limits>
 #include "array.hpp"
 #include "search.hpp"
 #include "print.hpp"
@@ -20,63 +21,62 @@ int main()
 
     while (true)
     {
-        cout << "\nМассив: ";
-        print_array(sorted_arr);
-        print_main_menu();
+        print_menu();
 
-        int main_choice;
-        if (!(cin >> main_choice) || main_choice == 0) 
+        int choice;
+        if (!(cin >> choice)) 
         {
-            cout << "Завершение работы программы.\n";
-            break;
-        }
-
-        if (main_choice != 1)
-        {
-            cout << "Неверный пункт меню, попробуйте снова.\n";
+            cout << "Ошибка ввода. Попробуйте снова.\n";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             continue;
         }
 
         int x;
-        if (input_x(&x) != 0)
-            break;
-
-        print_algo_menu();
-
-        int algo_choice;
-        if (!(cin >> algo_choice)) 
-            break;
-
         int index = -1;
-        bool valid_algo = true;
 
-        switch (algo_choice)
+        switch (choice)
         {
             case 1:
+                if (input_x(&x)) continue;
                 index = linear_search(sorted_arr, x);
+                print_algo_header(1);
+                print_search_result(index, x);
                 break;
-            case 2:
-                index = bin_search_1(sorted_arr, x);
-                break;
-            case 3:
-                index = bin_search_2(sorted_arr, x);
-                break;
-            case 4:
-                index = recursion_bin_search(sorted_arr, x);
-                break;
-            case 0:
-                valid_algo = false;
-                break;
-            default:
-                cout << "Неверный выбор алгоритма.\n";
-                valid_algo = false;
-                break;
-        }
 
-        if (valid_algo)
-        {
-            print_algo_header(algo_choice);
-            print_search_result(index, x);
+            case 2:
+                if (input_x(&x)) continue;
+                index = bin_search_1(sorted_arr, x);
+                print_algo_header(2);
+                print_search_result(index, x);
+                break;
+
+            case 3:
+                if (input_x(&x)) continue;
+                index = bin_search_2(sorted_arr, x);
+                print_algo_header(3);
+                print_search_result(index, x);
+                break;
+
+            case 4:
+                if (input_x(&x)) continue;
+                index = recursion_bin_search(sorted_arr, x);
+                print_algo_header(4);
+                print_search_result(index, x);
+                break;
+
+            case 5:
+                cout << "\nМассив: ";
+                print_array(sorted_arr);
+                break;
+
+            case 0:
+                cout << "Завершение работы программы.\n";
+                return 0;
+
+            default:
+                cout << "Неверный выбор, попробуйте снова.\n";
+                break;
         }
     }
 

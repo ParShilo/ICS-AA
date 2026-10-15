@@ -1,0 +1,64 @@
+\chapter{Технологическая часть}
+
+\section{Средства разработки}
+В качестве языка программирования со статической типизацией был выбран язык C++ (стандарт C++20). Для массива использовался контейнер стандартной библиотеки \texttt{std::vector<int>}.
+
+\section{Реализация алгоритмов}
+
+В листинге~\ref{lst:brute_force_search} представлена программная реализация алгоритма поиска полным перебором.
+\begin{figure}[H]
+	\centering
+		\lstinputlisting[
+		caption={Поиск полным перебором},
+		label={lst:brute_force_search},
+		firstline=6, lastline=14
+		]{algorithms.hpp}
+\end{figure}
+
+В листингах~\ref{lst:bin_search_1} и~\ref{lst:bin_search_2} представлены два варианта программных реализаций нерекурсивного алгоритма бинарного поиска.
+\begin{figure}[H]
+	\centering
+		\lstinputlisting[
+		caption={Нерекурсивный бинарный поиск с отложенным выходом},
+		label={lst:bin_search_1},
+		firstline=16, lastline=36
+		]{algorithms.hpp}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+		\lstinputlisting[
+		caption={Нерекурсивный бинарный поиск с предварительным выходом},
+		label={lst:bin_search_2},
+		firstline=38, lastline=55
+		]{algorithms.hpp}
+\end{figure}
+
+В листингах~\ref{lst:bin_search_r} и~\ref{lst:wrapper} представлены программная реализация рекурсивного алгоритма бинарного поиска и соответствующая функция-обёртка.
+\begin{figure}[H]
+	\centering
+		\lstinputlisting[
+			caption={Рекурсивный бинарный поиск},
+			label={lst:bin_search_r},
+			firstline=57, lastline=70
+		]{algorithms.hpp}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+		\lstinputlisting[
+			caption={Оберточная функция для рекурсивного бинарного поиска},
+			label={lst:wrapper},
+			firstline=72, lastline=77
+		]{algorithms.hpp}
+\end{figure}
+
+\section{Тестирование реализаций}
+В таблице~\ref{tbl:tests} представлены результаты функционального тестирования разработанных реализаций алгоритмов поиска.
+
+\input{parts/tests-table.tex}
+
+Все разработанные варианты реализации алгоритма поиска успешно прошли функциональное тестирование.
+
+\section{Вывод}
+В результате технологической части были выбраны язык программирования и средства разработки, представлены листинги исходного кода разработанных алгоритмов поиска, выполнено функциональное тестирование, результаты которого подтвердили корректность работы всех реализаций.

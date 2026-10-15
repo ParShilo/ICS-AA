@@ -1,14 +1,28 @@
 #include "array.hpp"
+#include <set>
+#include <random>
+#include <algorithm>
 
 using namespace std;
 
 vector<int> generate_array(int n)
 {
-    vector<int> arr(n);
-    iota(arr.begin(), arr.end(), 1);
+    set<int> unique_vals;
     random_device rd;
-    mt19937 g(rd());
-    shuffle(arr.begin(), arr.end(), g);
+    mt19937 gen(rd());
+    
+    int max_val = max(100000, n * 10);
+    uniform_int_distribution<> distrib(1, max_val);
+
+    while (unique_vals.size() < static_cast<size_t>(n))
+    {
+        unique_vals.insert(distrib(gen));
+    }
+
+    vector<int> arr(unique_vals.begin(), unique_vals.end());
+    
+    shuffle(arr.begin(), arr.end(), gen);
+    
     return arr;
 }
 
