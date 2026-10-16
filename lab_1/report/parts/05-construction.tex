@@ -2,14 +2,15 @@
 
 \section{Требования к программному обеспечению}
 
-К разрабатываемому программному обеспечению предъявляются следующие требования:
+К разрабатываемому программному обеспечению предъявляются следующие 5 требований:
 \begin{enumerate}
   \item ввод размера массива $N$ (натуральное число);
   \item автоматическое наполнение массива $A$ $N$ уникальными целочисленными значениями;
-  \item создание дубликата массива $A$, сортировка элементов дубликата по возрастанию;
+  \item создание дубликата массива $A$;
+  \item сортировка элементов дубликата по возрастанию;
   \item циклический вывод интерактивного меню с возможностью выбора и выполнения следующих операций:
   	\begin{itemize}
-  		\item вывод массива $A$;
+  		\item вывод отсортированного дубликата массива $A$;
   		\item выбор используемого алгоритма поиска;
       	\item ввод искомого значения $x \in \mathbb{Z}$;
       	\item вывод индекса элемента, равного $x$, или $-1$, если элемент отсутствует;
@@ -38,7 +39,7 @@
 Схема алгоритма приведена на рисунке~\ref{img:algo-brute-force}.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{image/algo/algo_1.png}
+	\includegraphics[scale=0.9]{image/algo/algo_1.pdf}
 	\caption{Схема алгоритма поиска полным перебором}
 	\label{img:algo-brute-force}
 \end{figure}
@@ -52,14 +53,14 @@
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{image/algo/algo_2.png}
+	\includegraphics[scale=0.9]{image/algo/algo_2.pdf}
 	\caption{Схема нерекурсивного алгоритма бинарного поиска с отложенным выходом}
 	\label{img:algo-bin-search-1}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{image/algo/algo_3.png}
+	\includegraphics[scale=0.9]{image/algo/algo_3.pdf}
 	\caption{Схема нерекурсивного алгоритма бинарного поиска с предварительным выходом}
 	\label{img:algo-bin-search-2}
 \end{figure}
@@ -70,7 +71,7 @@
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{image/algo/algo_4.png}
+	\includegraphics[scale=0.9]{image/algo/algo_4.pdf}
 	\caption{Схема рекурсивного алгоритма бинарного поиска}
 	\label{img:algo-bin-search-r}
 \end{figure}

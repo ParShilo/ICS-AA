@@ -5,52 +5,52 @@
 
 \section{Реализация алгоритмов}
 
-В листинге~\ref{lst:brute_force_search} представлена программная реализация алгоритма поиска полным перебором.
+На рисунке ~\ref{fig:brute_force_search} представлена программная реализация алгоритма поиска полным перебором.
 \begin{figure}[H]
 	\centering
 		\lstinputlisting[
-		caption={Поиск полным перебором},
-		label={lst:brute_force_search},
-		firstline=6, lastline=14
+		firstline=6, lastline=19
 		]{algorithms.hpp}
+		\caption{Поиск полным перебором}
+		\label{fig:brute_force_search}
 \end{figure}
 
-В листингах~\ref{lst:bin_search_1} и~\ref{lst:bin_search_2} представлены два варианта программных реализаций нерекурсивного алгоритма бинарного поиска.
+На рисунках~\ref{fig:bin_search_1} и~\ref{fig:bin_search_2} представлены два варианта программных реализаций нерекурсивного алгоритма бинарного поиска.
 \begin{figure}[H]
 	\centering
 		\lstinputlisting[
-		caption={Нерекурсивный бинарный поиск с отложенным выходом},
-		label={lst:bin_search_1},
-		firstline=16, lastline=36
+		firstline=21, lastline=41
 		]{algorithms.hpp}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-		\lstinputlisting[
-		caption={Нерекурсивный бинарный поиск с предварительным выходом},
-		label={lst:bin_search_2},
-		firstline=38, lastline=55
-		]{algorithms.hpp}
-\end{figure}
-
-В листингах~\ref{lst:bin_search_r} и~\ref{lst:wrapper} представлены программная реализация рекурсивного алгоритма бинарного поиска и соответствующая функция-обёртка.
-\begin{figure}[H]
-	\centering
-		\lstinputlisting[
-			caption={Рекурсивный бинарный поиск},
-			label={lst:bin_search_r},
-			firstline=57, lastline=70
-		]{algorithms.hpp}
+		\caption{Нерекурсивный бинарный поиск с отложенным выходом}
+		\label{fig:bin_search_1}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 		\lstinputlisting[
-			caption={Оберточная функция для рекурсивного бинарного поиска},
-			label={lst:wrapper},
-			firstline=72, lastline=77
+		firstline=43, lastline=60
 		]{algorithms.hpp}
+		\caption{Нерекурсивный бинарный поиск с предварительным выходом}
+		\label{fig:bin_search_2}
+\end{figure}
+
+На рисунках ~\ref{fig:bin_search_r} и~\ref{fig:wrapper} представлены программная реализация рекурсивного алгоритма бинарного поиска и соответствующая функция-обёртка.
+\begin{figure}[H]
+	\centering
+		\lstinputlisting[
+			firstline=62, lastline=75
+		]{algorithms.hpp}
+		\caption{Рекурсивный бинарный поиск}
+		\label{fig:bin_search_r}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+		\lstinputlisting[
+			firstline=77, lastline=82
+		]{algorithms.hpp}
+		\caption{Оберточная функция для рекурсивного бинарного поиска}
+		\label{fig:wrapper}
 \end{figure}
 
 \section{Тестирование реализаций}

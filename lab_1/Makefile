@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS := -Iinc -Wall -Wextra -Wpedantic -std=c++17
+CXXFLAGS := -Iinc -Wall -Wextra -Wpedantic -std=c++20
 
 SRC_DIR := src
 INC_DIR := inc
@@ -7,7 +7,7 @@ OUT_DIR := out
 APP_EXE := app.exe
 TEST_EXE := test.exe
 
-APP_OBJS := $(OUT_DIR)/main.o $(OUT_DIR)/array.o $(OUT_DIR)/print.o $(OUT_DIR)/search.o
+APP_OBJS := $(OUT_DIR)/main.o $(OUT_DIR)/array.o $(OUT_DIR)/print.o $(OUT_DIR)/search.o $(OUT_DIR)/counts.o
 TEST_OBJS := $(OUT_DIR)/test.o $(OUT_DIR)/search.o
 
 .PHONY: all clean

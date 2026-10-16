@@ -5,6 +5,7 @@
 #include "array.hpp"
 #include "search.hpp"
 #include "print.hpp"
+#include "counts.hpp"
 
 using namespace std;
 
@@ -68,6 +69,10 @@ int main()
             case 5:
                 cout << "\nМассив: ";
                 print_array(sorted_arr);
+                break;
+
+            case 6:
+                run_comparison_tests(N);
                 break;
 
             case 0:
