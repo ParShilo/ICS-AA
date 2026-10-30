@@ -118,3 +118,6 @@
 	\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
 
 \frenchspacing
+
+\usepackage{etoolbox}
+\patchcmd{\thebibliography}{\chapter*{\bibname}}{}{}{}
