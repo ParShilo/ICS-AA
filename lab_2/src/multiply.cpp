@@ -65,7 +65,7 @@ Matrix multiply_winograd_opt(const Matrix &A, const Matrix &B)
     const size_t N = A[0].size();
     const size_t Q = B[0].size();
 
-    Matrix c = create_matrix(M, Q, 0);
+    Matrix C = create_matrix(M, Q, 0);
 
     // Оптимизация в): кэширование N / 2
     const size_t half_n = N / 2;
@@ -95,26 +95,19 @@ Matrix multiply_winograd_opt(const Matrix &A, const Matrix &B)
     {
         for (size_t j = 0; j < Q; ++j)
         {
-            c[i][j] = -row[i] - col[j];
+            C[i][j] = -row[i] - col[j];
             for (size_t k = 0; k < half_n; ++k)
             {
                 const size_t two_k = k << 1;
-                c[i][j] += (A[i][two_k] + B[two_k + 1][j]) * (A[i][two_k + 1] + B[two_k][j]);
+                C[i][j] += (A[i][two_k] + B[two_k + 1][j]) * (A[i][two_k + 1] + B[two_k][j]);
             }
         }
     }
 
     if (N % 2 == 1)
-    {
-        const size_t last = N - 1;
         for (size_t i = 0; i < M; ++i)
-        {
             for (size_t j = 0; j < Q; ++j)
-            {
-                c[i][j] += A[i][last] * B[last][j];
-            }
-        }
-    }
+                C[i][j] += A[i][N - 1] * B[N - 1][j];
 
-    return c;
+    return C;
 }

@@ -117,13 +117,41 @@
     \item предварительное вычисление (кэширование) значения верхней границы циклов $half\_n = \lfloor N / 2 \rfloor$ в отдельную константу до входа в циклы вместо многократного повторения целочисленного деления $N / 2$ при каждой проверке условия продолжения цикла.
 \end{enumerate}
 
-Применение данных оптимизаций не изменяет результирующие значения матрицы $C$ и общее количество операций над её элементами, однако сокращает накладные расходы на целочисленную арифметику внутри циклов. Схема оптимизированного алгоритма Винограда приведена на рисунке~\ref{img:algo-winograd-opt}.
+Применение данных оптимизаций не изменяет результирующие значения матрицы $C$ и общее количество операций над её элементами, однако сокращает накладные расходы на целочисленную арифметику внутри циклов. Схемы оптимизированного алгоритма Винограда приведена на рисунках~\ref{img:algo-winograd-opt-1} -~\ref{img:algo-winograd-opt-5}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.85]{image/1.pdf}
+    \includegraphics[scale=0.6]{image/3-1.pdf}
     \caption{Схема оптимизированного алгоритма Винограда}
-    \label{img:algo-winograd-opt}
+    \label{img:algo-winograd-opt-1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{image/3-2.pdf}
+    \caption{Схема продолжения оптимизированного алгоритма Винограда}
+    \label{img:algo-winograd-opt-2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{image/3-3.pdf}
+    \caption{Схема продолжения оптимизированного алгоритма Винограда}
+    \label{img:algo-winograd-opt-3}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{image/3-4.pdf}
+    \caption{Схема продолжения оптимизированного алгоритма Винограда}
+    \label{img:algo-winograd-opt-4}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.6]{image/3-5.pdf}
+    \caption{Схема продолжения оптимизированного алгоритма Винограда}
+    \label{img:algo-winograd-opt-5}
 \end{figure}
 
 \section{Вывод}
