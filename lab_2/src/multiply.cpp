@@ -3,139 +3,115 @@
 using namespace std;
 
 // Стандартный алгоритм умножения матриц
-Matrix multiply_standard(const Matrix &a, const Matrix &b)
+Matrix multiply_standard(const Matrix &A, const Matrix &B)
 {
-    const size_t m = a.size();
-    const size_t n = a[0].size();
-    const size_t q = b[0].size();
+    const size_t M = A.size();
+    const size_t N = A[0].size();
+    const size_t Q = B[0].size();
 
-    Matrix c = create_matrix(m, q, 0);
+    Matrix C = create_matrix(M, Q, 0);
 
-    for (size_t i = 0; i < m; ++i)
-    {
-        for (size_t j = 0; j < q; ++j)
-        {
-            for (size_t k = 0; k < n; ++k)
-            {
-                c[i][j] += a[i][k] * b[k][j];
-            }
-        }
-    }
+    for (size_t i = 0; i < M; ++i)
+        for (size_t j = 0; j < Q; ++j)
+            for (size_t k = 0; k < N; ++k)
+                C[i][j] += A[i][k] * B[k][j];
 
-    return c;
+    return C;
 }
 
 // Базовый алгоритм Винограда
-Matrix multiply_winograd(const Matrix &a, const Matrix &b)
+Matrix multiply_winograd(const Matrix &A, const Matrix &B)
 {
-    const size_t m = a.size();
-    const size_t n = a[0].size();
-    const size_t q = b[0].size();
+    const size_t M = A.size();
+    const size_t N = A[0].size();
+    const size_t Q = B[0].size();
 
-    Matrix c = create_matrix(m, q, 0);
+    Matrix C = create_matrix(M, Q, 0);
 
-    vector<int> row(m, 0);
-    for (size_t i = 0; i < m; ++i)
+    vector<int> row(M, 0);
+    for (size_t i = 0; i < M; ++i)
+        for (size_t j = 0; j < N / 2; ++j)
+            row[i] += A[i][2 * j] * A[i][2 * j + 1];
+
+    vector<int> col(Q, 0);
+    for (size_t i = 0; i < Q; ++i)
+        for (size_t j = 0; j < M / 2; ++j)
+            col[i] += B[2 * j][i] * B[2 * j + 1][i];
+
+    for (size_t i = 0; i < M; ++i)
     {
-        for (size_t k = 0; k < n / 2; ++k)
+        for (size_t j = 0; j < Q; ++j)
         {
-            row[i] += a[i][2 * k] * a[i][2 * k + 1];
+            C[i][j] = -row[i] - col[j];
+            for (size_t k = 0; k < N / 2; ++k)
+                C[i][j] += (A[i][2 * k] + B[2 * k + 1][j]) * (A[i][2 * k + 1] + B[2 * k][j]);
         }
     }
 
-    vector<int> col(q, 0);
-    for (size_t j = 0; j < q; ++j)
-    {
-        for (size_t k = 0; k < n / 2; ++k)
-        {
-            col[j] += b[2 * k][j] * b[2 * k + 1][j];
-        }
-    }
+    if (N % 2 == 1)
+        for (size_t i = 0; i < M; ++i)
+            for (size_t j = 0; j < Q; ++j)
+                C[i][j] += A[i][N - 1] * B[N - 1][j];
 
-    for (size_t i = 0; i < m; ++i)
-    {
-        for (size_t j = 0; j < q; ++j)
-        {
-            c[i][j] = -row[i] - col[j];
-            for (size_t k = 0; k < n / 2; ++k)
-            {
-                c[i][j] += (a[i][2 * k] + b[2 * k + 1][j]) *
-                           (a[i][2 * k + 1] + b[2 * k][j]);
-            }
-        }
-    }
-
-    if (n % 2 == 1)
-    {
-        for (size_t i = 0; i < m; ++i)
-        {
-            for (size_t j = 0; j < q; ++j)
-            {
-                c[i][j] += a[i][n - 1] * b[n - 1][j];
-            }
-        }
-    }
-
-    return c;
+    return C;
 }
 
 // Оптимизированный алгоритм Винограда:
 // Вариант а): замена 2 * k на k << 1 с сохранением в two_k
-// Вариант в): кэширование n / 2 в half_n перед входом в циклы
-Matrix multiply_winograd_opt(const Matrix &a, const Matrix &b)
+// Вариант в): кэширование N / 2 в half_n перед входом в циклы
+Matrix multiply_winograd_opt(const Matrix &A, const Matrix &B)
 {
-    const size_t m = a.size();
-    const size_t n = a[0].size();
-    const size_t q = b[0].size();
+    const size_t M = A.size();
+    const size_t N = A[0].size();
+    const size_t Q = B[0].size();
 
-    Matrix c = create_matrix(m, q, 0);
+    Matrix c = create_matrix(M, Q, 0);
 
-    // Оптимизация в): кэширование n / 2
-    const size_t half_n = n / 2;
+    // Оптимизация в): кэширование N / 2
+    const size_t half_n = N / 2;
 
-    vector<int> row(m, 0);
-    for (size_t i = 0; i < m; ++i)
+    vector<int> row(M, 0);
+    for (size_t i = 0; i < M; ++i)
     {
         for (size_t k = 0; k < half_n; ++k)
         {
             // Оптимизация а): побитовый сдвиг k << 1
             const size_t two_k = k << 1;
-            row[i] += a[i][two_k] * a[i][two_k + 1];
+            row[i] += A[i][two_k] * A[i][two_k + 1];
         }
     }
 
-    vector<int> col(q, 0);
-    for (size_t j = 0; j < q; ++j)
+    vector<int> col(Q, 0);
+    for (size_t j = 0; j < Q; ++j)
     {
         for (size_t k = 0; k < half_n; ++k)
         {
             const size_t two_k = k << 1;
-            col[j] += b[two_k][j] * b[two_k + 1][j];
+            col[j] += B[two_k][j] * B[two_k + 1][j];
         }
     }
 
-    for (size_t i = 0; i < m; ++i)
+    for (size_t i = 0; i < M; ++i)
     {
-        for (size_t j = 0; j < q; ++j)
+        for (size_t j = 0; j < Q; ++j)
         {
             c[i][j] = -row[i] - col[j];
             for (size_t k = 0; k < half_n; ++k)
             {
                 const size_t two_k = k << 1;
-                c[i][j] += (a[i][two_k] + b[two_k + 1][j]) *
-                           (a[i][two_k + 1] + b[two_k][j]);
+                c[i][j] += (A[i][two_k] + B[two_k + 1][j]) * (A[i][two_k + 1] + B[two_k][j]);
             }
         }
     }
 
-    if (n % 2 == 1)
+    if (N % 2 == 1)
     {
-        const size_t last = n - 1;
-        for (size_t i = 0; i < m; ++i)
+        const size_t last = N - 1;
+        for (size_t i = 0; i < M; ++i)
         {
-            for (size_t j = 0; j < q; ++j)
+            for (size_t j = 0; j < Q; ++j)
             {
-                c[i][j] += a[i][last] * b[last][j];
+                c[i][j] += A[i][last] * B[last][j];
             }
         }
     }
