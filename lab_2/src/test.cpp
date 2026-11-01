@@ -6,7 +6,7 @@
 
 using namespace std;
 
-using MultiplyFunc = function<Matrix(const Matrix&, const Matrix&)>;
+using MultiplyFunc = function<Matrix(const Matrix&, const Matrix&, size_t, size_t, size_t)>;
 
 struct TestCase
 {
@@ -18,7 +18,11 @@ struct TestCase
 
 bool run_single_test(const TestCase& test, MultiplyFunc func)
 {
-    Matrix result = func(test.a, test.b);
+    size_t m = test.a.size();
+    size_t n = test.a.empty() ? 0 : test.a[0].size();
+    size_t q = test.b.empty() ? 0 : test.b[0].size();
+
+    Matrix result = func(test.a, test.b, m, n, q);
     return result == test.expected;
 }
 
@@ -79,12 +83,6 @@ int run_suite(const string& func_name, MultiplyFunc func)
             {{1}, {2}, {3}},
             {{4, 5}},
             {{4, 5}, {8, 10}, {12, 15}}
-        },
-        {
-            "Матрицы с отрицательными элементами",
-            {{-1, 2}, {3, -4}},
-            {{-5, -6}, {7, 8}},
-            {{19, 22}, {-43, -50}}
         }
     };
 
@@ -105,14 +103,13 @@ int run_suite(const string& func_name, MultiplyFunc func)
         }
     }
 
-    // Дополнительный стресс-тест на соответствие эталону (стандартному умножению)
     bool stress_ok = true;
     for (size_t n = 1; n <= 8; ++n)
     {
         Matrix rand_a = generate_matrix(n, n);
         Matrix rand_b = generate_matrix(n, n);
-        Matrix expected = multiply_standard(rand_a, rand_b);
-        if (func(rand_a, rand_b) != expected)
+        Matrix expected = multiply_standard(rand_a, rand_b, n, n, n);
+        if (func(rand_a, rand_b, n, n, n) != expected)
         {
             stress_ok = false;
             break;

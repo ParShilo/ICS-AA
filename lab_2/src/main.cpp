@@ -40,19 +40,19 @@ int main()
         switch (choice)
         {
             case 1:
-                res = multiply_standard(mat_a, mat_b);
+                res = multiply_standard(mat_a, mat_b, m, n, q);
                 print_algo_header(1);
                 print_matrix(res);
                 break;
 
             case 2:
-                res = multiply_winograd(mat_a, mat_b);
+                res = multiply_winograd(mat_a, mat_b, m, n, q);
                 print_algo_header(2);
                 print_matrix(res);
                 break;
 
             case 3:
-                res = multiply_winograd_opt(mat_a, mat_b);
+                res = multiply_winograd_opt(mat_a, mat_b, m, n, q);
                 print_algo_header(3);
                 print_matrix(res);
                 break;

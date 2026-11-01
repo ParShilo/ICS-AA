@@ -11,10 +11,12 @@ using namespace std;
 
 static double measure_time_sec(function<Matrix()> func, int repeats)
 {
+    func();
+
     clock_t start = clock();
     for (int i = 0; i < repeats; ++i)
     {
-        volatile Matrix res = func();
+        auto res = func();
         (void)res;
     }
     clock_t end = clock();
@@ -40,28 +42,21 @@ void run_comparison_benchmarks()
     auto run_series = [](const vector<size_t> &sizes, ofstream &out, const string &type)
     {
         cout << "\n--- Серия замеров (" << type << " размеры) ---\n";
-        cout << setw(6) << "N"
-             << setw(16) << "Стандартный (с)"
-             << setw(16) << "Виноград (с)"
-             << setw(20) << "Оптимиз. Виноград\n";
+        cout << "     " << "N" << "          " << "Стандартный" << "          " << "Виноград" << "          " << "Оптимиз. Виноград\n";
 
         for (size_t n : sizes)
         {
             Matrix a = generate_matrix(n, n);
             Matrix b = generate_matrix(n, n);
 
-            int repeats = (n <= 100) ? 20 : (n <= 300 ? 5 : 2);
-
-            double t_std = measure_time_sec([&]() { return multiply_standard(a, b); }, repeats);
-            double t_win = measure_time_sec([&]() { return multiply_winograd(a, b); }, repeats);
-            double t_opt = measure_time_sec([&]() { return multiply_winograd_opt(a, b); }, repeats);
+            int repeats = (n <= 100) ? 25 : (n <= 250 ? 10 : 5);
+            double t_std = measure_time_sec([&]() { return multiply_standard(a, b, n, n, n); }, repeats);
+            double t_win = measure_time_sec([&]() { return multiply_winograd(a, b, n, n, n); }, repeats);
+            double t_opt = measure_time_sec([&]() { return multiply_winograd_opt(a, b, n, n, n); }, repeats);
 
             out << n << "," << t_std << "," << t_win << "," << t_opt << "\n";
 
-            cout << setw(6) << n
-                 << setw(16) << fixed << setprecision(6) << t_std
-                 << setw(16) << t_win
-                 << setw(20) << t_opt << endl;
+            cout << setw(6) << n << setw(20) << fixed << setprecision(6) << t_std << setw(20) << t_win << setw(20) << t_opt << endl;
         }
     };
 
