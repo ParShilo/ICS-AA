@@ -35,7 +35,7 @@ Matrix multiply_winograd(const Matrix &A, const Matrix &B)
 
     vector<int> col(Q, 0);
     for (size_t i = 0; i < Q; ++i)
-        for (size_t j = 0; j < M / 2; ++j)
+        for (size_t j = 0; j < N / 2; ++j)
             col[i] += B[2 * j][i] * B[2 * j + 1][i];
 
     for (size_t i = 0; i < M; ++i)

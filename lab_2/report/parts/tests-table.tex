@@ -1,0 +1,69 @@
+\begingroup
+\setlength{\arraycolsep}{2.5pt}
+
+\begin{table}[H]
+    \caption{Функциональные тесты}
+    \label{tbl:tests}
+    \centering
+    \begin{tblr}{
+            width = \linewidth,
+            colsep = 3pt,
+            colspec = {Q[c,m] Q[c,m] Q[c,m] Q[c,m] Q[c,m] X[c,m]},
+            hlines, vlines,
+            row{1,2} = {font=\bfseries\small},
+            row{3-Z} = {font=\small},
+        }
+        \SetCell[r=2]{c} №
+        & \SetCell[c=2]{c} Входные данные &
+        & \SetCell[c=2]{c} Выходные данные &
+        & \SetCell[r=2]{c} Комментарий \\
+        & Матрица $A$ & Матрица $B$ & Ожид. & Получ. & \\
+        1  & $\begin{pmatrix} 3 \end{pmatrix}$
+           & $\begin{pmatrix} -4 \end{pmatrix}$
+           & $\begin{pmatrix} -12 \end{pmatrix}$
+           & $\begin{pmatrix} -12 \end{pmatrix}$
+           & Матрицы размера $1 \times 1$ \\
+        2  & $\begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{pmatrix}$
+           & $\begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix}$
+           & $\begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{pmatrix}$
+           & $\begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{pmatrix}$
+           & Умножение на единичную матрицу $E_{3 \times 3}$ \\
+        3  & $\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$
+           & $\begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}$
+           & $\begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}$
+           & $\begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}$
+           & Умножение на нулевую матрицу \\
+        4  & $\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$
+           & $\begin{pmatrix} 5 & 6 \\ 7 & 8 \end{pmatrix}$
+           & $\begin{pmatrix} 19 & 22 \\ 43 & 50 \end{pmatrix}$
+           & $\begin{pmatrix} 19 & 22 \\ 43 & 50 \end{pmatrix}$
+           & Квадратные матрицы $2 \times 2$, чётный размер \\
+        5  & $\begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{pmatrix}$
+           & $\begin{pmatrix} 9 & 8 & 7 \\ 6 & 5 & 4 \\ 3 & 2 & 1 \end{pmatrix}$
+           & $\begin{pmatrix} 30 & 24 & 18 \\ 84 & 69 & 54 \\ 138 & 114 & 90 \end{pmatrix}$
+           & $\begin{pmatrix} 30 & 24 & 18 \\ 84 & 69 & 54 \\ 138 & 114 & 90 \end{pmatrix}$
+           & Квадратные матрицы $3 \times 3$, нечётный размер \\
+        6  & $\begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{pmatrix}$
+           & $\begin{pmatrix} 7 & 8 \\ 9 & 10 \\ 11 & 12 \end{pmatrix}$
+           & $\begin{pmatrix} 58 & 64 \\ 139 & 154 \end{pmatrix}$
+           & $\begin{pmatrix} 58 & 64 \\ 139 & 154 \end{pmatrix}$
+           & Прямоугольные матрицы $2 \times 3$ и $3 \times 2$ \\
+        7  & $\begin{pmatrix} 1 & 2 \\ 3 & 4 \\ 5 & 6 \end{pmatrix}$
+           & $\begin{pmatrix} 1 & 2 & 3 & 4 \\ 5 & 6 & 7 & 8 \end{pmatrix}$
+           & $\begin{pmatrix} 11 & 14 & 17 & 20 \\ 23 & 30 & 37 & 44 \\ 35 & 46 & 57 & 68 \end{pmatrix}$
+           & $\begin{pmatrix} 11 & 14 & 17 & 20 \\ 23 & 30 & 37 & 44 \\ 35 & 46 & 57 & 68 \end{pmatrix}$
+           & Прямоугольные матрицы $3 \times 2$ и $2 \times 4$ \\
+        8  & $\begin{pmatrix} 1 & 2 & 3 & 4 \end{pmatrix}$
+           & $\begin{pmatrix} 1 \\ 2 \\ 3 \\ 4 \end{pmatrix}$
+           & $\begin{pmatrix} 30 \end{pmatrix}$
+           & $\begin{pmatrix} 30 \end{pmatrix}$
+           & Вектор-строка на вектор-столбец \\
+        9  & $\begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix}$
+           & $\begin{pmatrix} 4 & 5 \end{pmatrix}$
+           & $\begin{pmatrix} 4 & 5 \\ 8 & 10 \\ 12 & 15 \end{pmatrix}$
+           & $\begin{pmatrix} 4 & 5 \\ 8 & 10 \\ 12 & 15 \end{pmatrix}$
+           & Вектор-столбец на вектор-строку \\
+    \end{tblr}
+\end{table}
+
+\endgroup
