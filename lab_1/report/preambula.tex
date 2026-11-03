@@ -16,7 +16,13 @@
 \usepackage{letltxmacro}
 \usepackage{threeparttable}
 \usepackage{flafter}
+
 \usepackage[shortlabels]{enumitem}
+\makeatletter
+\AddEnumerateCounter{\asbuk}{\@asbuk}{м}
+\AddEnumerateCounter{\Asbuk}{\@Asbuk}{М}
+\makeatother
+
 \usepackage{multirow}
 \usepackage{tabularray}
 \usepackage[figure,table]{totalcount}
@@ -25,6 +31,7 @@
 \usepackage{microtype}
 
 \usepackage{hyperref}
+\hypersetup{hidelinks}
 
 \UseTblrLibrary{diagbox}
 
