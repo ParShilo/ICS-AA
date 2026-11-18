@@ -73,11 +73,11 @@
 \onehalfspacing
 
 \renewcommand{\theenumi}{\arabic{enumi}}
-\renewcommand{\labelenumi}{\arabic{enumi}\text{.}}
-\renewcommand{\theenumii}{.\arabic{enumii}}
-\renewcommand{\labelenumii}{\asbuk{enumii}\text{)}}
-\renewcommand{\theenumiii}{.\arabic{enumiii}}
-\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.}
+\renewcommand{\labelenumi}{\arabic{enumi})}
+\renewcommand{\theenumii}{\arabic{enumii}}
+\renewcommand{\labelenumii}{\arabic{enumii})}
+\renewcommand{\theenumiii}{\asbuk{enumiii}}
+\renewcommand{\labelenumiii}{\asbuk{enumiii})}
 
 \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
 
@@ -118,8 +118,11 @@
 \parindent=1.25cm
 
 \def\labelitemi{---}
-\setlist[itemize]{leftmargin=1.25cm, itemindent=0.65cm}
-\setlist[enumerate]{leftmargin=1.25cm, itemindent=0.55cm}
+\def\labelitemii{---}
+\setlist[itemize,1]{label=---, leftmargin=1.25cm, itemindent=0.65cm}
+\setlist[itemize,2]{label=---, leftmargin=0.75cm, itemindent=0.65cm}
+\setlist[enumerate,1]{label=\arabic*), leftmargin=1.25cm, itemindent=0.55cm}
+\setlist[enumerate,2]{label=\arabic*), leftmargin=0.75cm, itemindent=0.55cm}
 
 \newcommand{\specialcell}[2][c]{%
 	\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
